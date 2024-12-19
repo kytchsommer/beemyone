@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surprise Video</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+  <!-- GSAP and MorphSVGPlugin CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/MorphSVGPlugin.min.js"></script>
+
+  <style>
+    body {
+      background: #000;
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #151522;
+      color: white;
+      overflow: hidden;
+    }
+
+    /* Lightrope styles */
+    .lightrope {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      z-index: 1;
+      display: flex;
+      justify-content: space-evenly;
+      pointer-events: none;
+      padding-top: 20px;
+    }
+
+    .lightrope li {
+      position: relative;
+      animation-fill-mode: both;
+      animation-iteration-count: infinite;
+      list-style: none;
+      margin: 0 5px;
+      padding: 0;
+      display: inline-block;
+      width: 12px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(0,247,165,1);
+      box-shadow: 0px 5px 12px 3px rgba(0,247,165,1);
+      animation-name: flash-1;
+      animation-duration: 2s;
+    }
+
+    .lightrope li:nth-child(2n+1) {
+      background: rgba(0,255,255,1);
+      box-shadow: 0px 5px 12px 3px rgba(0,255,255,0.5);
+      animation-name: flash-2;
+      animation-duration: 0.4s;
+    }
+
+    .lightrope li:nth-child(4n+2) {
+      background: rgba(247,0,148,1);
+      box-shadow: 0px 5px 12px 3px rgba(247,0,148,1);
+      animation-name: flash-3;
+      animation-duration: 1.1s;
+    }
+
+    .lightrope li:nth-child(odd) {
+      animation-duration: 1.8s;
+    }
+
+    .lightrope li:nth-child(3n+1) {
+      animation-duration: 1.4s;
+    }
+
+    /* Animation keyframes */
+    @keyframes flash-1 { 
+      0%, 100% { background: rgba(0,247,165,1); box-shadow: 0px 5px 12px 3px rgba(0,247,165,1);} 
+      50% { background: rgba(0,247,165,0.4); box-shadow: 0px 5px 12px 3px rgba(0,247,165,0.2);}
+    }
+    @keyframes flash-2 { 
+      0%, 100% { background: rgba(0,255,255,1); box-shadow: 0px 5px 12px 3px rgba(0,255,255,1);} 
+      50% { background: rgba(0,255,255,0.4); box-shadow: 0px 5px 12px 3px rgba(0,255,255,0.2);}
+    }
+    @keyframes flash-3 { 
+      0%, 100% { background: rgba(247,0,148,1); box-shadow: 0px 5px 12px 3px rgba(247,0,148,1);} 
+      50% { background: rgba(247,0,148,0.4); box-shadow: 0px 5px 12px 3px rgba(247,0,148,0.2); }
+    }
+
+    /* Video container styles */
+    .video-container {
+      margin-top: 30px;
+      width: 90%;
+      max-width: 600px;
+      height: auto;
+      border-radius: 15px;
+      overflow: hidden;
+      display: block;
+      position: relative;
+      z-index: 0;
+    }
+
+    video {
+      width: 100%;
+      height: 100%; /* Ensure the video covers the container */
+      object-fit: contain;
+    }
+
+    /* Merry Christmas Text */
+    .merry-christmas {
+      font-size: 3rem;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+      color: #FFF;
+      opacity: 0;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Lightrope animation at the top -->
+  <ul class="lightrope">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+
+  <!-- First video container -->
+  <div class="video-container" id="firstVideoContainer">
+    <video id="firstVideo" autoplay muted>
+      <source src="tree2.mp4" type="video/mp4">
+      <source src="your-video.webm" type="video/webm">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <!-- Merry Christmas Text below the first video -->
+  <div class="merry-christmas">Merry Christmas!</div>
+  
+  <!-- Second video container (hidden initially) -->
+  <div class="video-container" id="secondVideoContainer" style="display:none;">
+    <video id="secondVideo" controls autoplay>
+      <source src="titibdayvideo.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <script>
+    // Wait for 9 seconds before switching from animation to video
+    setTimeout(function() {
+      document.querySelector('.lightrope').style.display = 'none'; // Hide lightrope after 9 seconds
+    }, 9000);
+
+    // Animate the "Merry Christmas" text after 3 seconds
+    setTimeout(function() {
+      gsap.to('.merry-christmas', { opacity: 1, duration: 1, y: 50, ease: "bounce.out" });
+    }, 3000); // Show the text 3 seconds after the page loads
+
+    // Show the second video and hide the first video after the 9 seconds
+    setTimeout(function() {
+      document.getElementById('secondVideoContainer').style.display = 'block'; // Show the second video
+      gsap.to('.merry-christmas', { opacity: 0, duration: 0.001 }); // Hide the Merry Christmas text
+      document.getElementById('firstVideoContainer').style.display = 'none'; // Hide the first video after 9 seconds
+    }, 9000); // Show the second video after 9 seconds
+  </script>
+</body>
+</html>
